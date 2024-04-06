@@ -1,41 +1,26 @@
-import * as fs from "fs";
-import * as csv from "csv-parser";
-
-interface Row {
-  Symbol: string;
+export default async function ParseCSVfromURL(url: string): Promise<string[]> {
+  try {
+    const response = await fetch(url);
+    const data = await response.text();
+    const parsedData = parseCSV(data);
+    return parsedData;
+  } catch (error) {
+    console.error("Error fetching or parsing CSV:", error);
+    return [];
+  }
 }
 
-export default function readCSVAndExtractSymbols(
-  csvFile: string
-): Promise<string[]> {
-  return new Promise((resolve, reject) => {
-    const symbols: string[] = [];
+function parseCSV(csvData: string): string[] {
+  const lines = csvData.split("\n");
+  const headers = lines[0].split(",");
+  const symbols: string[] = [];
 
-    fs.createReadStream(csvFile)
-      .pipe(csv.default())
-      .on("data", (row: Row) => {
-        symbols.push(row.Symbol);
-      })
-      .on("end", () => {
-        resolve(symbols);
-      })
-      .on("error", (error: Error) => {
-        reject(error);
-      });
-  });
+  for (let i = 1; i < lines.length; i++) {
+    const currentLine = lines[i].split(",");
+    if (currentLine.length === headers.length) {
+      symbols.push(currentLine[2]);
+    }
+  }
+
+  return symbols;
 }
-
-export const collectionNames: string[] = [];
-const csvFile = "C://Users/Rar/Desktop/ind_niftymidcap50list.csv";
-readCSVAndExtractSymbols(csvFile)
-  .then(async (symbols: string[]) => {
-    symbols.forEach((element) => {
-      collectionNames.push(element);
-    });
-  })
-  .catch((error: Error) => {
-    console.error("Error:", error.message);
-  })
-  .finally(() => {
-    console.log("Complete");
-  });

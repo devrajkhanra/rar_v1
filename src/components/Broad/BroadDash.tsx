@@ -11,7 +11,6 @@ import { BroadMonthlyChng } from "./monthlyChng";
 import { BroadWeeklyVolume } from "./weeklyVolume";
 import { BroadWeeklyChng } from "./weeklyChng";
 import BroadWeeklyCounter from "./weeklyCounter";
-import { ScrollArea } from "../ui/scroll-area";
 
 export default function BroadDash() {
     return (
@@ -50,8 +49,6 @@ export default function BroadDash() {
                     </Card>
                 </CardContent>
             </div>
-
-
         </div>
     );
 }

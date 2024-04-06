@@ -7,35 +7,12 @@ import {
   storeIndexDataFromURL,
   storeStockDataFromURL,
 } from "@/helpers/dbHelpers";
-
-import readCSVAndExtractSymbols from "@/utils/csvUtils";
+import ParseCSVfromURL from "@/utils/csvUtils";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // interface Row {
-  //   Symbol: string;
-  // }
-
-  // function readCSVAndExtractSymbols(csvFile: string): Promise<string[]> {
-  //   return new Promise((resolve, reject) => {
-  //     const symbols: string[] = [];
-
-  //     fs.createReadStream(csvFile)
-  //       .pipe(csv.default())
-  //       .on("data", (row: Row) => {
-  //         symbols.push(row.Symbol);
-  //       })
-  //       .on("end", () => {
-  //         resolve(symbols);
-  //       })
-  //       .on("error", (error: Error) => {
-  //         reject(error);
-  //       });
-  //   });
-  // }
-
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method Not Allowed" });
   }
@@ -71,8 +48,9 @@ export default async function handler(
       "Nifty Realty",
       "Nifty Services Sector",
     ];
-    const csvFile = "C://Users/Rar/Desktop/ind_nifty200list.csv";
-    const allowedStockNames = await readCSVAndExtractSymbols(csvFile);
+    const csvFile =
+      "https://www.niftyindices.com/IndexConstituent/ind_nifty200list.csv";
+    const allowedStockNames = await ParseCSVfromURL(csvFile);
 
     const urlIndex = `https://archives.nseindia.com/content/indices/ind_close_all_${dateStr}.csv`;
     await storeIndexDataFromURL(urlIndex, allowedIndexNames); // Parse and save data from CSV

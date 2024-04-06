@@ -8,6 +8,7 @@ import { useLastUpdatedStore } from "@/store/useLastUpdated";
 import axios from "axios";
 import { formatDatefromString } from "@/helpers/dateHelpers";
 import { Separator } from "./ui/separator";
+import { Toaster, toast } from 'sonner';
 
 export default function DownloadData() {
     const { lastUpdatedDate, loading, error, fetchLastUpdatedDate } =
@@ -36,10 +37,13 @@ export default function DownloadData() {
             setDownloadInProgress(false); // Download completed, hide spinner
             // Fetch last updated date again
             fetchLastUpdatedDate();
+            toast.success('Successfully Downloaded')
+
         } catch (error) {
             console.error("Error downloading data:", error);
             // Handle error here
             setDownloadInProgress(false); // Download failed, hide spinner
+            toast.error('Download Failed')
         }
     };
 
@@ -78,6 +82,7 @@ export default function DownloadData() {
                     )}
                 </Button>
             </div>
+            <Toaster />
         </div>
     );
 }

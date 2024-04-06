@@ -19,7 +19,7 @@ import { ScrollArea } from "../ui/scroll-area"
 
 
 export default function Midcap50() {
-    return <ScrollArea className="h-[600px]">
+    return <ScrollArea className="h-full">
         <CardHeader>
             <div className="flex items-center gap-4">
                 <div>
