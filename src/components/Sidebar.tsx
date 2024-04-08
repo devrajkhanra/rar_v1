@@ -27,16 +27,16 @@ const Sidebar: React.FC = () => {
     const remainingItems = items.slice(4);
 
     return (
-        <div className="flex flex-col  gap-4 xs:w-[200px] sm:w-[250px] border-r lg:min-w-[300px] min-h-screen p-4 fixed">
+        <div className="flex flex-col gap-4 sm:w-[200px] md:w-[250px] border-r lg:w-[300px] min-h-screen p-4 fixed">
             <div>
                 <UserItem />
             </div>
 
             <div className="flex flex-col gap-4">
                 <ul className="divide-y divide-gray-50 rounded-lg border">
-                    <li className="bg-slate-200 px-2 font-semibold">Broad</li>
+                    <li className="bg-slate-200 px-2 font-semibold sm:text-sm md:text-base">Broad</li>
                     {firstFourItems.map((item, index) => (
-                        <li key={index} className="hover:bg-slate-200 px-3 cursor-pointer flex items-center py-2 text-[16px] text-neutral-500 font-light" onClick={() => handleItemClick(item)}>
+                        <li key={index} className="hover:bg-slate-200 px-3 cursor-pointer flex items-center py-2 text-[16px] text-neutral-500 font-light sm:text-sm md:text-base active:bg-slate-300 active:text-white" onClick={() => handleItemClick(item)}>
                             {itemIconMap[item]} {/* Use icon from the mapping */}
                             <span className={selectedItems.includes(item as Item) ? "font-bold ml-2" : "ml-2"}>{item}</span>
                         </li>
@@ -44,9 +44,9 @@ const Sidebar: React.FC = () => {
                 </ul>
                 {remainingItems.length > 0 && (
                     <ul className="divide-y divide-gray-50  rounded-lg border">
-                        <li className="bg-slate-200 px-2 font-semibold">Sectorial</li>
+                        <li className="bg-slate-200 px-2 font-semibold sm:text-sm md:text-base">Sectorial</li>
                         {remainingItems.map((item, index) => (
-                            <li key={index} className="hover:bg-slate-200 px-3 cursor-pointer flex items-center py-2 text-[16px] text-neutral-500 font-light" onClick={() => handleItemClick(item)}>
+                            <li key={index} className="hover:bg-slate-200 px-3 cursor-pointer flex items-center py-2 text-[16px] text-neutral-500 font-light sm:text-sm md:text-base active:bg-slate-300 active:text-white" onClick={() => handleItemClick(item)}>
                                 {itemIconMap[item]} {/* Use icon from the mapping */}
                                 <span className={selectedItems.includes(item as Item) ? "font-bold ml-2" : "ml-2"}>{item}</span>
                             </li>

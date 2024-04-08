@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react';
 import { Button } from '../ui/button';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import useMonthlyCounterStore from '@/store/monthlyCounter';
-import useMonthlyDatesStore from '@/store/monthlyDates';
-import { formatDateString, formatMonthDate, getMonthlyRangeDash } from '@/helpers/dateHelpers';
 
-const BroadMonthlyCounter: React.FC = () => {
-    const { count, increment, decrement } = useMonthlyCounterStore();
-    const { currentDates, previousDates, setCurrentDates, setPreviousDates } = useMonthlyDatesStore();
+import { formatDateString, getWeeklyRangeDash } from '@/helpers/dateHelpers';
+import useWeeklyCounterStore from '@/store/weeklyCounter';
+import useWeeklyDatesStore from '@/store/weeklyDates';
+
+const BroadWeeklyCounter: React.FC = () => {
+    const { count, increment, decrement } = useWeeklyCounterStore();
+    const { currentDates, previousDates, setCurrentDates, setPreviousDates } = useWeeklyDatesStore();
 
     useEffect(() => {
 
-        const currentDate = getMonthlyRangeDash(count);
-        const previousDate = getMonthlyRangeDash(count - 1);
+        const currentDate = getWeeklyRangeDash(count);
+        const previousDate = getWeeklyRangeDash(count - 1);
 
         setCurrentDates(currentDate);
         setPreviousDates(previousDate);
@@ -48,4 +49,4 @@ const BroadMonthlyCounter: React.FC = () => {
     );
 };
 
-export default BroadMonthlyCounter;
+export default BroadWeeklyCounter;
