@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { AlertCircle, Download, RotateCw } from "lucide-react";
+import { AlertCircle, Check, Download, RotateCw, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -82,7 +82,12 @@ export default function DownloadData() {
                     )}
                 </Button>
             </div>
-            <Toaster />
+            <Toaster
+                icons={{
+                    success: <Check className='rounded-full bg-green-500 mr-4 ' size={16} color="white" />,
+                    error: <X className='rounded-full bg-red-500 mr-4 ' size={16} color="white" />
+                }}
+            />
         </div>
     );
 }

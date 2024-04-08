@@ -24,7 +24,9 @@ export default function BroadDash() {
                 <CardContent>
                     <Card className="p-4">
                         <div className="flex gap-4 justify-between">
-                            <p className="text-pretty font-normal text-neutral-700">Monthly View</p>
+                            <p className="text-base font-normal text-neutral-700">
+                                Monthly View
+                            </p>
                             <BroadMonthlyCounter />
                         </div>
                         <div className="flex gap-2">
@@ -39,7 +41,9 @@ export default function BroadDash() {
                 <CardContent>
                     <Card className="p-4">
                         <div className="flex gap-4">
-                            <p className="text-lg font-semibold text-neutral-700">Weekly View</p>
+                            <p className="text-base font-semibold text-neutral-700">
+                                Weekly View
+                            </p>
                             <BroadWeeklyCounter />
                         </div>
                         <div className="flex gap-2">

@@ -27,7 +27,7 @@ const Sidebar: React.FC = () => {
     const remainingItems = items.slice(4);
 
     return (
-        <div className="flex flex-col gap-4 w-[300px] border-r min-w-[300px] min-h-screen p-4 fixed">
+        <div className="flex flex-col  gap-4 xs:w-[200px] sm:w-[250px] border-r lg:min-w-[300px] min-h-screen p-4 fixed">
             <div>
                 <UserItem />
             </div>
