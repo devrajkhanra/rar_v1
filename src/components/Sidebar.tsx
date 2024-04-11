@@ -42,55 +42,81 @@ const Sidebar: React.FC = () => {
     const remainingItems = items.slice(4);
 
     return (
-        <div className="flex flex-col gap-4 sm:w-[200px] md:w-[250px] lg:w-[300px] border-r min-h-screen p-4 fixed">
+        <div className="flex flex-col gap-4 w-[52px] sm:w-[200px] md:w-[250px] lg:w-[300px] border-r min-h-screen p-4 fixed">
             <div>
                 <UserItem />
             </div>
 
             <div className="flex flex-col gap-4">
-                <ul className="divide-y divide-transparent rounded-lg border">
-                    <li className="bg-slate-200 px-2 font-semibold sm:text-sm md:text-base dark:bg-slate-800 dark:text-slate-400">
-                        Broad
-                    </li>
-                    {firstFourItems.map((item, index) => (
-                        <li
-                            key={index}
-                            className="hover:bg-slate-200 dark:hover:bg-slate-800 dark:hover:text-neutral-500 px-3 cursor-pointer flex items-center py-2 text-[16px] text-neutral-500 font-light sm:text-sm md:text-base active:bg-slate-300 active:text-white"
-                            onClick={() => handleItemClick(item)}
-                        >
-                            {itemIconMap[item]} {/* Use icon from the mapping */}
-                            <span
-                                className={
-                                    selectedItems.includes(item as Item)
-                                        ? "font-bold ml-2 dark:text-yellow-500"
-                                        : "ml-2"
-                                }
-                            >
-                                {item}
-                            </span>
+                {firstFourItems.length > 0 && (
+                    <ul className="divide-y divide-transparent sm:rounded-lg sm:border ">
+                        <li className="hidden sm:block px-2 font-semibold bg-slate-200 text-sm md:text-base dark:bg-slate-800 dark:text-slate-400">
+                            Broad
                         </li>
-                    ))}
-                </ul>
+                        {firstFourItems.map((item, index) => (
+                            <li
+                                key={index}
+                                className="flex items-center justify-start sm:p-2 hover:bg-slate-200 hover:cursor-pointer sm:text-sm md:text-base dark:hover:bg-slate-800 dark:hover:text-neutral-500"
+                                onClick={() => handleItemClick(item)}
+                            >
+                                <div className="sm:block sm:mr-2 text-neutral-500">
+                                    <span
+                                        className={
+                                            selectedItems.includes(item as Item)
+                                                ? "font-bold text-violet-600"
+                                                : "font-thin"
+                                        }
+                                    >
+                                        {itemIconMap[item]}
+                                    </span>
+                                </div>
+                                <span className="hidden sm:block text-neutral-500">
+                                    <span
+                                        className={
+                                            selectedItems.includes(item as Item)
+                                                ? "font-bold text-violet-600"
+                                                : ""
+                                        }
+                                    >
+                                        {item}
+                                    </span>
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
+                )}
                 {remainingItems.length > 0 && (
-                    <ul className="divide-y divide-transparent rounded-lg border">
-                        <li className="bg-slate-200 px-2 font-semibold sm:text-sm md:text-base dark:bg-slate-800 dark:text-slate-400">
+                    <ul className="divide-y divide-transparent sm:rounded-lg sm:border">
+                        <li className="hidden sm:block px-2 font-semibold bg-slate-200 text-sm md:text-base dark:bg-slate-800 dark:text-slate-400">
                             Sectorial
                         </li>
                         {remainingItems.map((item, index) => (
                             <li
                                 key={index}
-                                className="hover:bg-slate-200 dark:hover:bg-slate-800 dark:hover:text-neutral-500 px-3 cursor-pointer flex items-center py-2 text-[16px] text-neutral-500 font-light sm:text-sm md:text-base active:bg-slate-300 active:text-white"
+                                className="flex items-center justify-start sm:p-2 hover:bg-slate-200 hover:cursor-pointer sm:text-sm md:text-base dark:hover:bg-slate-800 dark:hover:text-neutral-500"
                                 onClick={() => handleItemClick(item)}
                             >
-                                {itemIconMap[item]} {/* Use icon from the mapping */}
-                                <span
-                                    className={
-                                        selectedItems.includes(item as Item)
-                                            ? "font-bold ml-2"
-                                            : "ml-2"
-                                    }
-                                >
-                                    {item}
+                                <div className="sm:block sm:mr-2 text-neutral-500">
+                                    <span
+                                        className={
+                                            selectedItems.includes(item as Item)
+                                                ? "font-bold text-violet-600"
+                                                : "font-thin"
+                                        }
+                                    >
+                                        {itemIconMap[item]}
+                                    </span>
+                                </div>
+                                <span className="hidden sm:block text-neutral-500">
+                                    <span
+                                        className={
+                                            selectedItems.includes(item as Item)
+                                                ? "font-bold text-violet-600"
+                                                : ""
+                                        }
+                                    >
+                                        {item}
+                                    </span>
                                 </span>
                             </li>
                         ))}

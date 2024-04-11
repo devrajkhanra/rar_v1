@@ -55,7 +55,7 @@ export default function DownloadData() {
     return (
         <div className="flex gap-2">
             <div className="flex gap-2 items-center justify-center">
-                <Label htmlFor="last">Last Updated:</Label>
+                <Label htmlFor="last" className="text-neutral-400">Last Updated:</Label>
                 {loading ? (
                     <RotateCw className="animate-spin" size={16} strokeWidth={1} />
                 ) : error ? (
@@ -79,11 +79,12 @@ export default function DownloadData() {
                     variant={"ghost"}
                     onClick={handleDownload}
                     disabled={!selectedDate || downloadInProgress}
+                    className="hover:text-white hover:bg-green-500 rounded-full w-10 h-8"
                 >
                     {downloadInProgress ? (
-                        <RotateCw className="animate-spin" size={16} strokeWidth={1} />
+                        <RotateCw className="animate-spin" size={16} strokeWidth={2} />
                     ) : (
-                        <Download size={16} strokeWidth={1} className="hover:cursor-pointer hover:text-green-600" />
+                        <Download size={16} strokeWidth={2} className="hover:cursor-pointer" />
                     )}
                 </Button>
             </div>

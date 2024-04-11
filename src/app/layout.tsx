@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={`${inter.className} flex items-start justify-between`}>
         <ThemeProvider attribute="class" defaultTheme="system">
           <Sidebar />
-          <main className=" grid w-full h-full lg:pl-[300px] md:pl-[250px] sm:pl-[200px]">
+          <main className=" grid w-full h-full pl-[52px] lg:pl-[300px] md:pl-[250px] sm:pl-[200px]">
             <Header />
             {children}
           </main>
