@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
     BarChart,
     Bar,
@@ -54,10 +54,19 @@ export function BroadMonthlyVolume() {
         };
     }, [previousDates, currentDates]);
 
-    const chartData = Object.keys(volumeRatios).map(key => ({
-        name: key,
-        ratio: volumeRatios[key]
-    }));
+
+    const chartData = useMemo(() => {
+        return Object.keys(volumeRatios).map(key => ({
+            name: key,
+            ratio: volumeRatios[key]
+        }));
+    }, [volumeRatios]);
+
+
+    // const chartData = Object.keys(volumeRatios).map(key => ({
+    //     name: key,
+    //     ratio: volumeRatios[key]
+    // }));
 
     return (
         <ResponsiveContainer width='25%' height={150}>

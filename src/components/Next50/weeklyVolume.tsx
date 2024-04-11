@@ -7,7 +7,7 @@ interface MonthlyResponse {
     [key: string]: number;
 }
 
-export function BroadWeeklyVolumeSec() {
+export function BroadWeeklyVolume() {
     const { currentDates, previousDates } = useWeeklyDatesStore();
     const [volumeRatios, setVolumeRatios] = useState<MonthlyResponse>({});
 
@@ -31,30 +31,8 @@ export function BroadWeeklyVolumeSec() {
 
         const fetchVolumeRatios = async () => {
             try {
-                const collectionNames = [
-                    "Nifty Auto",
-                    "Nifty Bank",
-                    "Nifty Commodities",
-                    "Nifty Consumer Durables",
-                    "Nifty CPSE",
-                    "Nifty Energy",
-                    "Nifty Financial Services",
-                    "Nifty FMCG",
-                    "Nifty Healthcare Index",
-                    "Nifty IT",
-                    "Nifty India Consumption",
-                    "Nifty Infrastructure",
-                    "Nifty Media",
-                    "Nifty Metal",
-                    "Nifty MNC",
-                    "Nifty Oil & Gas",
-                    "Nifty Pharma",
-                    "Nifty PSU Bank",
-                    "Nifty PSE",
-                    "Nifty Private Bank",
-                    "Nifty Realty",
-                    "Nifty Services Sector",
-                ]
+                const collectionNamesResponse = await axios.get('/api/next50List');
+                const collectionNames = collectionNamesResponse.data;
                 if (collectionNames) {
                     const response = await fetchMonthlyVolume(collectionNames, previousDates, currentDates, signal1);
                     setVolumeRatios(response);
@@ -72,35 +50,32 @@ export function BroadWeeklyVolumeSec() {
 
     const sortedData = Object.entries(volumeRatios).sort((a, b) => b[1] - a[1]);
 
-    if (sortedData.length === 0) {
-        return
-    }
-
     return (
         <div className='flex flex-col gap-1'>
             <h2 className='font-bold'>Weekly Volume Break</h2>
             <table className='border rounded-lg'>
 
 
-                <ScrollArea className='h-28 w-48 '>
+                <ScrollArea className='h-28 w-48'>
                     <thead className='border-b'>
                         <tr className='bg-slate-600 text-slate-200 table-row'>
-                            <th className='text-left'>Indice</th>
+                            <th className='text-left'>Stock</th>
                             <th className='text-right'>Volume</th>
                         </tr>
                     </thead>
                     <tbody className='w-full'>
+
                         {(sortedData).map(([stock, volume]) => (
                             <tr key={stock} className='text-sm font-light table-row'>
                                 <td className='text-left'>{stock}</td>
                                 <td className='text-right'>{volume.toFixed(2)}</td>
                             </tr>
                         ))}
+
                     </tbody>
                 </ScrollArea>
 
             </table>
         </div>
-
     );
 }

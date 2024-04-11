@@ -32,7 +32,6 @@ const Home: React.FC = () => {
       <ScrollArea>
         {SelectedComponent && <SelectedComponent />}
       </ScrollArea>
-
     </main>
   );
 };

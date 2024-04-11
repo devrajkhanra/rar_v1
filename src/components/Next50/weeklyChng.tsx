@@ -8,7 +8,7 @@ interface MonthlyResponse {
     [key: string]: number;
 }
 
-export function BroadWeeklyChngSec() {
+export function BroadWeeklyChng() {
     const { currentDates, previousDates } = useWeeklyDatesStore();
     const [chngPercentages, setChngPercentages] = useState<MonthlyResponse>({});
 
@@ -32,30 +32,8 @@ export function BroadWeeklyChngSec() {
 
         const fetchChanges = async () => {
             try {
-                const collectionNames = [
-                    "Nifty Auto",
-                    "Nifty Bank",
-                    "Nifty Commodities",
-                    "Nifty Consumer Durables",
-                    "Nifty CPSE",
-                    "Nifty Energy",
-                    "Nifty Financial Services",
-                    "Nifty FMCG",
-                    "Nifty Healthcare Index",
-                    "Nifty IT",
-                    "Nifty India Consumption",
-                    "Nifty Infrastructure",
-                    "Nifty Media",
-                    "Nifty Metal",
-                    "Nifty MNC",
-                    "Nifty Oil & Gas",
-                    "Nifty Pharma",
-                    "Nifty PSU Bank",
-                    "Nifty PSE",
-                    "Nifty Private Bank",
-                    "Nifty Realty",
-                    "Nifty Services Sector",
-                ]
+                const collectionNamesResponse = await axios.get('/api/next50List')
+                const collectionNames = collectionNamesResponse.data
                 if (collectionNames) {
                     const response = await fetchMonthlyChng(collectionNames, previousDates, currentDates, signal1);
                     setChngPercentages(response);
@@ -79,10 +57,6 @@ export function BroadWeeklyChngSec() {
     const top5Highest = sortedData.slice(0, 5);
     const bottom5Lowest = sortedData.slice(-5);
 
-    if (sortedData.length === 0) {
-        return
-    }
-
     return (
         <div className='flex items-center gap-4'>
             <div className='flex flex-col gap-1'>
@@ -90,7 +64,7 @@ export function BroadWeeklyChngSec() {
                 <table className='border rounded-lg w-80'>
                     <thead className='border-b w-full'>
                         <tr className='bg-green-600 text-green-200 table-row'>
-                            <th className='text-left'>Indice</th>
+                            <th className='text-left'>Stock</th>
                             <th className='text-right'>Change (%)</th>
                         </tr>
                     </thead>
@@ -107,10 +81,10 @@ export function BroadWeeklyChngSec() {
 
             <div className='flex flex-col gap-1'>
                 <h2 className='font-bold'>Top Loser</h2>
-                <table className='border rounded-lg w-80'>
+                <table className='border rounded-lg  w-80'>
                     <thead className='border-b w-full'>
                         <tr className='bg-red-600 text-red-200 table-row'>
-                            <th className='text-left'>Indice</th>
+                            <th className='text-left'>Stock</th>
                             <th className='text-right'>Change (%)</th>
                         </tr>
                     </thead>

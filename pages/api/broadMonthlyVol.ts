@@ -10,6 +10,7 @@ export default async function handler(
   const { collectionNames, dates1, dates2 } = req.body; // Assuming dates are sent in request body
   try {
     await connectDB();
+    await console.log("Broadly Monthly Vol");
     const result1 = await fetchDataFromDB(collectionNames, dates1);
     const result2 = await fetchDataFromDB(collectionNames, dates2);
     const maxV1 = filterMaxVolume(result1);

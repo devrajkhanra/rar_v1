@@ -31,7 +31,7 @@ export function BroadMonthlyChng() {
 
         const fetchChanges = async () => {
             try {
-                const collectionNamesResponse = await axios.get('/api/midcap50List')
+                const collectionNamesResponse = await axios.get('/api/nifty50List')
                 const collectionNames = collectionNamesResponse.data
                 if (collectionNames) {
                     const response = await fetchMonthlyChng(collectionNames, previousDates, currentDates, signal1);

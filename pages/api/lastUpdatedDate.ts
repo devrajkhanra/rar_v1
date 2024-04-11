@@ -4,7 +4,7 @@ import { connectDB } from "./mongoose";
 import { LastUpdated } from "@/utils/dateUtils";
 
 connectDB(); // Connect to MongoDB
-
+console.log("Last Updated Date");
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse

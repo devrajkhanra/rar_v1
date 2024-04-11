@@ -65,7 +65,7 @@ export function BroadWeeklyChng() {
                     <thead className='border-b w-full'>
                         <tr className='bg-green-600 text-green-200 table-row'>
                             <th className='text-left'>Stock</th>
-                            <th className='text-right'>Weekly Change (%)</th>
+                            <th className='text-right'>Change (%)</th>
                         </tr>
                     </thead>
                     <tbody className=''>
@@ -85,7 +85,7 @@ export function BroadWeeklyChng() {
                     <thead className='border-b w-full'>
                         <tr className='bg-red-600 text-red-200 table-row'>
                             <th className='text-left'>Stock</th>
-                            <th className='text-right'>Weekly Change (%)</th>
+                            <th className='text-right'>Change (%)</th>
                         </tr>
                     </thead>
                     <tbody className=''>

@@ -40,8 +40,8 @@ export default function BroadDash() {
             <div>
                 <CardContent>
                     <Card className="p-4">
-                        <div className="flex gap-4">
-                            <p className="text-base font-semibold text-neutral-700">
+                        <div className="flex gap-4 justify-between">
+                            <p className="text-base font-normal text-neutral-700">
                                 Weekly View
                             </p>
                             <BroadWeeklyCounter />

@@ -1,27 +1,24 @@
 import React, { useEffect } from 'react';
 import { Button } from '../ui/button';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import useMonthlyCounterStore from '@/store/monthlyCounter';
-import useMonthlyDatesStore from '@/store/monthlyDates';
-import { formatDateString, formatMonthDate, getMonthlyRangeDash } from '@/helpers/dateHelpers';
+import useTwoMonthlyCounterStore from '@/store/twoMonthlyCounter';
+import useTwoMonthlyDatesStore from '@/store/twoMonthlyDates';
+import { formatDateString, getDatesOfTwoMonths } from '@/helpers/dateHelpers';
 
-const BroadMonthlyCounter: React.FC = () => {
-    const { count, increment, decrement } = useMonthlyCounterStore();
-    const { currentDates, previousDates, setCurrentDates, setPreviousDates } = useMonthlyDatesStore();
+const NextMonthlyCounter: React.FC = () => {
+    const { count, increment, decrement } = useTwoMonthlyCounterStore();
+    const { currentDates, setCurrentDates } = useTwoMonthlyDatesStore();
 
     useEffect(() => {
 
-        const currentDate = getMonthlyRangeDash(count);
-        const previousDate = getMonthlyRangeDash(count - 1);
-
+        const currentDate = getDatesOfTwoMonths(count);
         setCurrentDates(currentDate);
-        setPreviousDates(previousDate);
     }, [count]); // Include count in the dependency array
 
     return (
         <div className='flex items-center gap-3'>
             <div className='flex flex-col gap-1 items-center'>
-                {previousDates[0] !== undefined && <p className='text-neutral-400 font-light'>{formatDateString(previousDates[0])}</p>}
+                {currentDates[0] !== undefined && <p className='text-neutral-400 font-light'>{formatDateString(currentDates[0])}</p>}
                 <Button size={'icon'} variant={'ghost'} onClick={decrement} className='text-neutral-300'><ArrowLeft /></Button>
             </div>
 
@@ -48,4 +45,4 @@ const BroadMonthlyCounter: React.FC = () => {
     );
 };
 
-export default BroadMonthlyCounter;
+export default NextMonthlyCounter;

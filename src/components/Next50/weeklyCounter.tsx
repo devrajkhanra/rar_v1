@@ -21,16 +21,15 @@ const BroadWeeklyCounter: React.FC = () => {
 
     return (
         <div className='flex items-center gap-3'>
-            <div className='flex flex-col items-center'>
-                {previousDates[0] !== undefined && <p className='text-neutral-400 font-light text-sm'>{formatDateString(previousDates[0])}</p>}
-                <Button size={'icon'} variant={'ghost'} onClick={decrement} className='text-neutral-300 hover:text-indigo-400'><ArrowLeft /></Button>
+            <div className='flex flex-col gap-1 items-center'>
+                {previousDates[0] !== undefined && <p className='text-neutral-400 font-light'>{formatDateString(previousDates[0])}</p>}
+                <Button size={'icon'} variant={'ghost'} onClick={decrement} className='text-neutral-300'><ArrowLeft /></Button>
             </div>
 
-            <p className='font-light text-sm'>Count: {count}</p>
-
-            <div className='flex flex-col items-center'>
-                {currentDates[0] !== undefined && <p className='text-neutral-400 font-light  text-sm'>{formatDateString(currentDates[currentDates.length - 1])}</p>}
-                <Button size={'icon'} variant={'ghost'} onClick={increment} className='text-neutral-300 hover:text-indigo-400'><ArrowRight /></Button>
+            <p className='font-light'>Count: {count}</p>
+            <div className='flex flex-col gap-1 items-center'>
+                {currentDates[0] !== undefined && <p className='text-neutral-400 font-light'>{formatDateString(currentDates[currentDates.length - 1])}</p>}
+                <Button size={'icon'} variant={'ghost'} onClick={increment} className='text-neutral-300'><ArrowRight /></Button>
             </div>
 
             {/* <ul>

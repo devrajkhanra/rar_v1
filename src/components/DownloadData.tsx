@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { AlertCircle, Check, Download, RotateCw, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,6 +16,11 @@ export default function DownloadData() {
     const [selectedDate, setSelectedDate] = useState<string>("");
     const [downloadInProgress, setDownloadInProgress] = useState<boolean>(false);
 
+    const formattedDate = useMemo(() => {
+        if (!selectedDate) return ""; // Return empty string if no date selected
+        return formatDatefromString(selectedDate);
+    }, [selectedDate]);
+
     useEffect(() => {
         fetchLastUpdatedDate();
     }, []);
@@ -27,7 +32,7 @@ export default function DownloadData() {
     const handleDownload = async () => {
         if (!selectedDate) return; // Do nothing if no date is selected
         setDownloadInProgress(true); // Start download, show spinner
-        const dateStr = await formatDatefromString(selectedDate);
+        const dateStr = await formattedDate
 
         try {
             await axios.post("/api/parseAndSaveData", {
