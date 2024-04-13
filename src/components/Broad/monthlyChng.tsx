@@ -26,7 +26,7 @@ export function BroadMonthlyChng() {
 
         const fetchMonthlyChng = async (dates1: string[], dates2: string[], signal: AbortSignal) => {
             try {
-                const response = await axios.post('/api/broadMonthlyChng', {
+                const response = await axios.post('/api/chng', {
                     collectionNames: ["Nifty 50", "Nifty Next 50", "Nifty Midcap 50",],
                     dates1,
                     dates2
