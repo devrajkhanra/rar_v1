@@ -17,7 +17,7 @@ interface IndexData extends Document {
 }
 
 // Connect to MongoDB
-connect("mongodb://localhost:27017/nse_v1");
+// connect("mongodb://localhost:27017/nse_v1");
 
 interface DbHelpers {
   saveLastUpdatedDate: (date: string) => Promise<void>;

@@ -1,19 +1,32 @@
 import React, { useEffect } from 'react';
 import { Button } from '../ui/button';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { formatDateString } from '@/helpers/dateHelpers';
 
-import { formatDateString, getWeeklyRangeDash } from '@/helpers/dateHelpers';
-import useWeeklyCounterStore from '@/store/weeklyCounter';
-import useWeeklyDatesStore from '@/store/weeklyDates';
+interface CounterProps {
+    decrement: () => void;
+    increment: () => void;
+    count: number;
+    currentDates: string[];
+    previousDates: string[];
+    setCurrentDates: (dates: string[]) => void;
+    setPreviousDates: (dates: string[]) => void;
+    functionName: (count: number) => string[];
+}
 
-const BroadWeeklyCounter: React.FC = () => {
-    const { count, increment, decrement } = useWeeklyCounterStore();
-    const { currentDates, previousDates, setCurrentDates, setPreviousDates } = useWeeklyDatesStore();
-
+const Counter: React.FC<CounterProps> = ({
+    decrement,
+    increment,
+    count,
+    currentDates,
+    previousDates,
+    setCurrentDates,
+    setPreviousDates,
+    functionName
+}) => {
     useEffect(() => {
-
-        const currentDate = getWeeklyRangeDash(count);
-        const previousDate = getWeeklyRangeDash(count - 1);
+        const currentDate = functionName(count);
+        const previousDate = functionName(count - 1);
 
         setCurrentDates(currentDate);
         setPreviousDates(previousDate);
@@ -31,22 +44,8 @@ const BroadWeeklyCounter: React.FC = () => {
                 {currentDates[0] !== undefined && <p className='text-neutral-400 font-light'>{formatDateString(currentDates[currentDates.length - 1])}</p>}
                 <Button size={'icon'} variant={'ghost'} onClick={increment} className='text-neutral-300'><ArrowRight /></Button>
             </div>
-
-            {/* <ul>
-                <p>Previous</p>
-                {previousDates.map(date => (
-                    <li key={date}>{date}</li>
-                ))}
-            </ul>
-            <br />
-            <ul>
-                <p>Current</p>
-                {currentDates.map(date => (
-                    <li key={date}>{date}</li>
-                ))}
-            </ul> */}
         </div>
     );
 };
 
-export default BroadWeeklyCounter;
+export default Counter;

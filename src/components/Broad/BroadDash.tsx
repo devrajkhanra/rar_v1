@@ -16,6 +16,7 @@ export default function BroadDash() {
     return (
         <div className="m-2 h-full">
             <CardHeader>
+
                 <CardTitle>Broad Market</CardTitle>
                 <CardDescription>Broad Market Analysis</CardDescription>
             </CardHeader>
