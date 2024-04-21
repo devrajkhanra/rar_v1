@@ -32,6 +32,7 @@ const Sidebar: React.FC = () => {
         "SectorialDashboard",
         "Auto",
         "Bank",
+        'Daily'
     ]);
 
     const handleItemClick = (item: string) => {

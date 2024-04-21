@@ -33,6 +33,10 @@ interface DbHelpers {
     allowedIndexNames: string[],
     dates: string[]
   ) => Promise<{ [indexName: string]: IndexData[] }>;
+  fetchDailyDataFromDB: (
+    allowedIndexNames: string[],
+    offset: number
+  ) => Promise<{ [indexName: string]: IndexData[] }>;
 }
 
 const IndexSchema = new Schema<IndexData>({
@@ -201,6 +205,45 @@ const dbHelpers: DbHelpers = {
       throw new Error(`Error fetching index data: ${error}`);
     }
   },
+
+  fetchDailyDataFromDB: async (
+    allowedIndexNames: string[],
+    offset: number
+  ): Promise<{ [indexName: string]: IndexData[] }> => {
+    const fetchedIndexData: { [indexName: string]: IndexData[] } = {};
+
+    try {
+      console.log("Backend:", allowedIndexNames, offset);
+      for (const indexName of allowedIndexNames) {
+        // Define the IndexModel outside the loop
+        const IndexModel = model<IndexData>(indexName, IndexSchema);
+
+        // Query the database for index data based on symbol and date
+        const indexData = await IndexModel.find({
+          symbol: indexName,
+        }).exec(); // Execute the query
+
+        // Convert string dates to Date objects and sort
+        const sortedDocs = indexData.sort((a, b) => {
+          const dateA = new Date(
+            a.date.split("-").reverse().join("-")
+          ).getTime();
+          const dateB = new Date(
+            b.date.split("-").reverse().join("-")
+          ).getTime();
+          return dateA - dateB;
+        });
+
+        // Get the last two documents
+        const lastTwoDocs = sortedDocs.slice(-2);
+
+        fetchedIndexData[indexName] = lastTwoDocs;
+      }
+      return fetchedIndexData;
+    } catch (error) {
+      throw new Error(`Error fetching index data: ${error}`);
+    }
+  },
 };
 
 export const {
@@ -208,4 +251,5 @@ export const {
   storeIndexDataFromURL,
   storeStockDataFromURL,
   fetchDataFromDB,
+  fetchDailyDataFromDB,
 } = dbHelpers;

@@ -7,6 +7,7 @@ import Midcap50 from '@/components/Midcap50/Midcap50';
 import Next50 from '@/components/Next50/Next50';
 import Nifty50 from '@/components/Nifty50/Nifty50';
 import { ScrollArea } from '@radix-ui/react-scroll-area';
+import Daily from '@/components/Daily/daily';
 
 // Define components corresponding to each item
 const ComponentMap: Record<string, React.FC> = {
@@ -15,6 +16,7 @@ const ComponentMap: Record<string, React.FC> = {
   "Nifty 50": () => <Nifty50 />,
   'Next 50': () => <Next50 />,
   'Midcap 50': () => <Midcap50 />,
+  'Daily': () => <Daily apiListName={''} />
 
 };
 
